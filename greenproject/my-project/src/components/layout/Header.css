@@ -1,0 +1,88 @@
+
+.main-header {
+  background-color: #122a20; /* 다크 그린 배경 */
+  color: white;
+  padding: 0 40px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logo-icon {
+  color: #3ddc84; /* 밝은 녹색 */
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-item {
+  color: #c0c0c0;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 0;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-item:hover {
+  color: white;
+}
+
+/* NavLink의 active 클래스를 활용한 스타일 */
+.nav-item.active {
+  color: #3ddc84;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-btn, .login-btn-header {
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.contact-btn {
+  background-color: #3ddc84;
+  color: #122a20;
+}
+.contact-btn:hover {
+    background-color: #34c774;
+}
+
+.login-btn-header {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-btn-header:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

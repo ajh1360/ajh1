@@ -1,0 +1,167 @@
+/* src/pages/AddProjectPage.css */
+
+/* 페이지 전체 배경 및 패딩 설정 */
+.add-project-page {
+  background-color: #f7f8fc;
+  padding: 24px 40px;
+  min-height: calc(100vh - 60px); /* 헤더 높이를 제외한 최소 높이 */
+}
+
+/* 페이지 상단 헤더 (경로, 제목) */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.breadcrumb {
+  color: #6c757d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.page-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #212529;
+  margin-top: 4px;
+}
+
+/* 알림 메시지 공통 스타일 */
+.alert {
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  border-left: 5px solid;
+  font-size: 15px;
+}
+
+.alert strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+/* 성공 메시지 스타일 */
+.alert-success {
+  background-color: #e9f7ef;
+  color: #2d7d4f;
+  border-color: #4caf50;
+}
+
+/* 에러 메시지 스타일 */
+.alert-error {
+  background-color: #fdeded;
+  color: #a13d3d;
+  border-color: #f44336;
+}
+
+/* 폼 전체를 감싸는 흰색 컨테이너 */
+.form-container {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #dee2e6;
+}
+
+/* 2단 그리드 레이아웃 */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* 라벨과 입력 필드를 묶는 그룹 */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 1칸이 아닌 전체 너비를 차지하는 필드 */
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+/* 라벨 스타일 */
+.form-group label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+}
+
+/* 입력 필드 공통 스타일 (input, select, textarea) */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #495057;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Select 태그의 기본 화살표 아이콘을 커스텀하기 위함 */
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+/* Textarea 리사이즈 방향 고정 */
+.form-group textarea {
+  resize: vertical;
+}
+
+/* 폼 하단 버튼 영역 */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e9ecef;
+}
+
+/* 버튼 공통 스타일 */
+.form-actions button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+/* 취소 버튼 */
+.cancel-btn {
+  background-color: #f1f3f4;
+  color: #495057;
+  border: 1px solid #ced4da;
+}
+.cancel-btn:hover {
+  background-color: #e9ecef;
+}
+
+/* 프로젝트 추가 버튼 */
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+}
+.submit-btn:hover {
+  background-color: #0056b3;
+}

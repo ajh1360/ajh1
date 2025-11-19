@@ -1,0 +1,104 @@
+/* src/pages/LoginPage.css */
+
+/* 전체 페이지를 화면 중앙으로 정렬하기 위한 스타일 */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px); /* 헤더 높이를 제외한 전체 높이 */
+  background-color: #ffffff;
+}
+
+/* 로그인 폼 컨테이너 (흰색 카드) */
+.login-container {
+  width: 400px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8e8e8;
+}
+
+/* '관리자 로그인' 제목 */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* 라벨(아이디, 비밀번호)과 입력창 그룹 */
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+/* 아이콘과 입력창을 감싸는 래퍼 */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* 입력창 내부의 아이콘 (사람, 자물쇠) */
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 15px;
+  font-size: 18px;
+  color: #999;
+}
+
+/* 비밀번호 보이기/숨기기 아이콘 */
+.input-wrapper .pw-toggle-icon {
+  position: absolute;
+  right: 15px;
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* input 태그 공통 스타일 */
+.login-form input {
+  width: 100%;
+  padding: 12px 15px 12px 45px; /* 왼쪽 패딩을 늘려 아이콘 공간 확보 */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* input 태그에 포커스 되었을 때 스타일 */
+.login-form input:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  background-color: #ffffff;
+}
+
+/* 로그인 버튼 */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a73e8; /* 구글 블루와 비슷한 파란색 */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* 로그인 버튼에 마우스를 올렸을 때 */
+.login-btn:hover {
+  background-color: #1558b8;
+}
