@@ -1,120 +1,160 @@
 /* --- 페이지 기본 레이아웃 --- */
-.detail-page-container {
+.project-list-page {
   background-color: #122a20;
   color: white;
-  padding: 40px 60px;
   min-height: calc(100vh - 160px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  padding: 40px 60px;
 }
-.detail-content-card {
-  width: 100%;
-  max-width: 1500px;
-  min-width : 1100px;
+
+/* --- 페이지 헤더 --- */
+.list-page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.list-page-header h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+.list-page-header p {
+  font-size: 18px;
+  color: #c0c0c0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- 필터 바 --- */
+.filter-bar {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a382b;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.filter-input, .filter-select {
+  background-color: #122a20;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+.filter-input { width: 300px; }
+.filter-select { min-width: 180px; }
+.filter-button {
+  background-color: #3ddc84;
+  color: #122a20;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.filter-button:hover { background-color: #34c774; }
+
+/* --- 메인 콘텐츠 & 로딩 --- */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.loading-spinner {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #c0c0c0;
+}
+
+/* --- 프로젝트 테이블 (새로운 스타일) --- */
+.table-container {
   background-color: #1a382b;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 30px 40px;
-}
-.loading, .error-message { text-align: center; padding: 50px; font-size: 18px; }
-.not-found { align-items: center; text-align: center; }
-
-/* --- 헤더 & 탭 네비게이션 --- */
-.detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 25px; /* 헤더와 구분선 사이의 간격 */
-}
-.detail-header h2 { font-size: 28px; font-weight: 700; margin: 0; }
-
-.detail-nav {
-  display: flex;
-  gap: 10px;
-}
-.nav-tab {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #c0c0c0;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none;
-}
-.nav-tab:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-.nav-tab.active {
-  background-color: #3ddc84;
-  color: #122a20;
-  border-color: #3ddc84;
-}
-.registry-link {
-  color: #3ddc84;
-  border-color: #3ddc84;
-}
-.registry-link:hover {
-  background-color: #3ddc84;
-  color: #122a20;
-}
-
-/* --- 공통 요소 --- */
-.divider { border: none; height: 1px; background-color: rgba(255, 255, 255, 0.1); margin: 0 0 25px 0; }
-.detail-actions { margin-top: 30px; text-align: right; }
-/* .back-button { 이전 스타일과 동일 } */
-
-/* --- Summary 탭 컨텐츠 --- */
-.detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-.detail-item h4 { font-size: 14px; color: #c0c0c0; margin-bottom: 8px; font-weight: 400; margin-top: 0; }
-.detail-item p { font-size: 16px; color: white; font-weight: 500; margin: 0; }
-.detail-item.full-width { grid-column: 1 / -1; }
-.detail-item a { color: #3ddc84; text-decoration: none; }
-.detail-item a:hover { text-decoration: underline; }
-
-/* --- Credits & Transactions 탭 컨텐츠 --- */
-.credits-overview-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  text-align: center;
-}
-.overview-item {
-  background-color: rgba(0, 0, 0, 0.2);
   padding: 20px;
-  border-radius: 8px;
+  overflow-x: auto;
 }
-.overview-item h4 { font-size: 14px; color: #c0c0c0; margin-bottom: 10px; font-weight: 400; text-transform: uppercase; margin-top: 0; }
-.overview-item p { font-size: 24px; color: white; font-weight: 600; margin: 0; }
-
-.credits-breakdown-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-.breakdown-column h3 { font-size: 18px; margin-bottom: 15px; }
-.year-data { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-.year-label { color: #c0c0c0; }
-.year-value { font-weight: 500; }
-
-.transactions-table {
+.project-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
 }
-.transactions-table th, .transactions-table td {
-  padding: 12px 15px;
+.project-table th, .project-table td {
+  padding: 16px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.transactions-table thead th {
+.project-table thead th {
   color: #c0c0c0;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-.transactions-table tbody tr:last-child td { border-bottom: none; }
+.project-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+.project-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.details-link {
+  color: #3ddc84;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.details-link:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* --- 페이지네이션 --- */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 10px;
+}
+.page-number {
+  color: #c0c0c0;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.page-number:hover {
+  border-color: #3ddc84;
+  color: #3ddc84;
+  background-color: rgba(61, 220, 132, 0.1);
+}
+.page-number.active {
+  background-color: #3ddc84;
+  color: #122a20;
+  font-weight: 600;
+  border-color: #3ddc84;
+}
+
+.pagination-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.page-number {
+  padding: 8px 14px;
+  background: #133a2b;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.page-number.active {
+  background: #1abc9c;
+  color: #fff;
+  font-weight: bold;
+}
