@@ -1,4 +1,4 @@
-import axiosInstance from "./axiosInstance"; 
+import axiosInstance from "./axiosInstance";
 export const projectApi = {
 
   getProjects: async (pageNo) => {
@@ -20,4 +20,24 @@ export const projectApi = {
       throw error;
     }
   },
+
+  getUserInfo: async () => {
+    try {
+      const response = await axiosInstance.get(`/user/me`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+      throw error;
+    }
+  },
+
+  logout: async () => {
+    try {
+      const response = await axiosInstance.post(`/auth/logout`);
+      return response.data;
+    } catch (error) {
+      console.error("Error logging out:", error);
+      throw error;
+    }
+  }
 };

@@ -6,6 +6,8 @@ import ProjectListPage from './pages/ProjectListPage';
 import AddProjectPage from './pages/AddProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import ProjectCreditPage from './pages/ProjectCreditPage';
+import AccountPage from './pages/AccountPage';
+
 import './App.css';
 
 function App() {
@@ -19,10 +21,11 @@ function App() {
           <Route path="/projects/:pageNo" element={<ProjectListPage />} />
           <Route path="/projects/add" element={<AddProjectPage />} />
           <Route path="/projects/:projectId/detail" element={<ProjectDetailPage />} />
-          <Route path="/projects/:projectId/credit" element={<ProjectCreditPage/>}/>
+          <Route path="/projects/:projectId/credit" element={<ProjectCreditPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
       </main>
-      
+
     </BrowserRouter>
   );
 }

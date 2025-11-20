@@ -57,13 +57,15 @@ function ProjectDetailPage() {
 
         {/* 제목 + 상태 */}
         <div className="detail-header">
-          <h2>{project.project_name}</h2>
-          <span className={`status-pill status-${project.status?.toLowerCase()}`}>
-            {project.status}
-          </span>
+          <div className="title-status-group">
+            <h2>{project.project_name}</h2>
+            <span className={`status-pill status-${project.status?.toLowerCase()}`}>
+              {project.status}
+            </span>
+          </div>
           <div className="detail-nav">
-              <Link to={`/projects/${projectId}/detail`} className="nav-tab active">Summary</Link>
-              <Link to={`/projects/${projectId}/credit`} className="nav-tab">Credits & Transactions</Link>
+            <Link to={`/projects/${projectId}/detail`} className="nav-tab active">Summary</Link>
+            <Link to={`/projects/${projectId}/credit`} className="nav-tab">Credits & Transactions</Link>
           </div>
         </div>
 
@@ -131,7 +133,7 @@ function ProjectDetailPage() {
             <h4>Registry Document</h4>
             <p>
               <a
-                href={project.registry_document} 
+                href={project.registry_document}
                 target="_blank"
                 rel="noopener noreferrer"
               >

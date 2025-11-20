@@ -3,7 +3,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://ec2-52-78-72-83.ap-northeast-2.compute.amazonaws.com:3001",
+  // baseURL: "http://ec2-52-78-72-83.ap-northeast-2.compute.amazonaws.com:3001",
+  baseURL: '/api',
   headers: {
     "Content-Type": "application/json",
   },
