@@ -1,6 +1,7 @@
 import axiosInstance from "./axiosInstance";
 export const projectApi = {
 
+  // 프로젝트 관련
   getProjects: async (pageNo) => {
     try {
       const response = await axiosInstance.get(`/projects/${pageNo}`);
@@ -21,6 +22,27 @@ export const projectApi = {
     }
   },
 
+  addNewProject: async (project) => {
+    try {
+      const response = await axiosInstance.post('/projects/new', project);
+      return response.data;
+    } catch (error) {
+      console.error("Error Adding new Project", error)
+      throw error;
+    }
+  },
+
+  removeProject: async (id) => {
+    try {
+      const response = await axiosInstance.delete(`/projects/${id}`);
+      return response.data;
+    } catch (error) {
+      console.log('Error Removing Project', error);
+      throw error;
+    }
+  },
+
+  //사용자 관련
   getUserInfo: async () => {
     try {
       const response = await axiosInstance.get(`/user/me`);
@@ -51,13 +73,5 @@ export const projectApi = {
     }
   },
 
-  addNewProject: async (project) => {
-    try {
-      const response = await axiosInstance.post('/projects/new', project);
-      return response.data;
-    } catch (error) {
-      console.error("Error Adding new Project", error)
-      throw error;
-    }
-  }
+
 };

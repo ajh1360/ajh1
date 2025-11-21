@@ -180,7 +180,7 @@ function AddProjectPage() {
   return (
     <div className="add-project-page">
       <div className="page-header" ref={topRef}>
-        <p className="breadcrumb">Add New Project</p>
+        <p className="breadcrumb">새 프로젝트 등록</p>
       </div>
 
       {alert && (
@@ -370,7 +370,7 @@ function AddProjectPage() {
           <button
             type="button"
             className="cancel-btn"
-            onClick={() => navigate('/projects')}
+            onClick={() => navigate('/user/projects')}
           >
             취소
           </button>

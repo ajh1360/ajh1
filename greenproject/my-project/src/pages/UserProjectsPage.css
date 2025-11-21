@@ -73,17 +73,78 @@
 }
 
 .view-link {
-    color: #3ddc84;
+    color: white;
     text-decoration: none;
     font-weight: 500;
     padding: 6px 12px;
+    margin-right: 3px;
     border: 1px solid rgba(61, 220, 132, 0.3);
     border-radius: 6px;
     transition: all 0.2s;
 }
 
 .view-link:hover {
+    background-color: rgba(255, 255, 255, 0.169);
+}
+
+.edit-link {
+    color: #3ddc84;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    margin-right: 3px;
+    border: 1px solid rgba(61, 220, 132, 0.3);
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.edit-link:hover {
     background-color: rgba(61, 220, 132, 0.1);
+}
+
+.remove-link {
+    color: #e61919;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    margin-right: 3px;
+    border: 1px solid rgba(61, 220, 132, 0.3);
+    border-radius: 6px;
+    transition: all 0.2s;
+    background-color: transparent;
+}
+
+.remove-link:hover {
+    background-color: rgba(212, 56, 56, 0.389);
+}
+
+.confirm-remove-btn {
+    border: 1px solid rgba(61, 220, 132, 0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-right: 3px;
+    background-color: transparent;
+    transition: all 0.2s;
+    color: rgb(4, 162, 4);
+    align-items: center;
+}
+
+.confirm-remove-btn:hover {
+    background-color: rgba(61, 220, 132, 0.1);
+}
+
+.cancel-remove-btn {
+    border: 1px solid rgba(61, 220, 132, 0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    background-color: transparent;
+    transition: all 0.2s;
+    color: red;
+    align-items: center;
+}
+
+.cancel-remove-btn:hover {
+    background-color: #b31b1b4d;
 }
 
 .status-badge {
