@@ -102,7 +102,7 @@ function UserProjectsPage() {
                                     </td>
                                     <td>
                                         <Link to={`/projects/${project.id}/detail`} className="view-link">View</Link>
-                                        <Link to={`/projects/${project.id}/detail`} className="edit-link">Edit</Link>
+                                        <Link to={`/projects/${project.id}/edit`} className="edit-link">Edit</Link>
 
                                         {removingProjectId === project.id ? (
                                             <span className="remove-confirm-group">

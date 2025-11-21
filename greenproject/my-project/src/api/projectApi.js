@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "./axiosInstance";
 export const projectApi = {
 
@@ -8,6 +9,16 @@ export const projectApi = {
       return response.data;
     } catch (error) {
       console.error("Error fetching projects:", error);
+      throw error;
+    }
+  },
+
+  getProjectDetail: async (projectId) => {
+    try {
+      const response = await axiosInstance.get(`/projects/${projectId}/detail`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching project detail:", error);
       throw error;
     }
   },
@@ -38,6 +49,16 @@ export const projectApi = {
       return response.data;
     } catch (error) {
       console.log('Error Removing Project', error);
+      throw error;
+    }
+  },
+
+  updateProject: async (id, project) => {
+    try {
+      const response = await axiosInstance.patch(`/projects/${id}`, project);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating project:", error);
       throw error;
     }
   },

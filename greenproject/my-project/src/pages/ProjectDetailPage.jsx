@@ -3,6 +3,26 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
 import './ProjectDetailPage.css';
 
+// Registry 이미지 import
+import ACR from '../img/ACR2.jpg';
+import ART from '../img/ART2.jpg';
+import CAR from '../img/CAR2.jpg';
+import GLD from '../img/GLD2.jpg';
+import VCS from '../img/VCS2.jpg';
+
+// Scope 이미지 import
+import Agriculture from '../img/scope/Agriculture.png';
+import CCS from '../img/scope/Carbon_capture_and_storage.png';
+import Chemical from '../img/scope/Chemical_processes.png';
+import Engineered from '../img/scope/Engineered_removal.png';
+import Forestry from '../img/scope/Forestry_and_landuse.png';
+import Household from '../img/scope/Household_and_community.png';
+import Industrial from '../img/scope/Industrial_and_commercial.png';
+import Transportation from '../img/scope/Transportation.png';
+import Waste from '../img/scope/Waste_management.png';
+import GradientText from '../components/ui/GradientText';
+
+
 function ProjectDetailPage() {
   const { projectId } = useParams();
   const navigate = useNavigate();
@@ -11,6 +31,27 @@ function ProjectDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Registry 이미지 매핑
+  const registryImages = {
+    'ACR': ACR,
+    'ART': ART,
+    'CAR': CAR,
+    'GLD': GLD,
+    'VCS': VCS,
+  };
+
+  // Scope 이미지 매핑
+  const scopeImages = {
+    'Agriculture': Agriculture,
+    'Carbon Capture & Storage': CCS,
+    'Chemical Processes': Chemical,
+    'Engineered Removal': Engineered,
+    'Forestry & Land Use': Forestry,
+    'Household & Community': Household,
+    'Industrial & Commercial': Industrial,
+    'Transportation': Transportation,
+    'Waste Management': Waste,
+  };
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -30,6 +71,12 @@ function ProjectDetailPage() {
 
     fetchProject();
   }, [projectId]);
+
+  // 숫자 포맷터 (3자리마다 콤마)
+  const formatNumber = (num) => {
+    if (num === null || num === undefined) return "N/A";
+    return num.toLocaleString();
+  };
 
   // 로딩 상태
   if (loading) {
@@ -75,14 +122,17 @@ function ProjectDetailPage() {
         {/* 주요 정보 */}
         <div className="detail-grid">
 
-          <div className="detail-item">
+          <div className="project-id-item">
             <h4>Project ID</h4>
-            <p>{project.project_id}</p>
-          </div>
-
-          <div className="detail-item">
-            <h4>Registry</h4>
-            <p>{project.registry}</p>
+            {/* <p className="project-id-text">{project.project_id}</p> */}
+            <GradientText
+              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+              animationSpeed={5}
+              showBorder={false}
+              className="custom-class"
+            >
+              {project.project_id}
+            </GradientText>
           </div>
 
           <div className="detail-item">
@@ -91,8 +141,35 @@ function ProjectDetailPage() {
           </div>
 
           <div className="detail-item">
+            <h4>Registry</h4>
+            {registryImages[project.registry] ? (
+              <div className="image-container">
+                <img
+                  src={registryImages[project.registry]}
+                  alt={project.registry}
+                  className="registry-image"
+                />
+              </div>
+            ) : (
+              <p>{project.registry}</p>
+            )}
+          </div>
+
+
+          <div className="detail-item">
             <h4>Scope</h4>
-            <p>{project.scope}</p>
+            {scopeImages[project.scope] ? (
+              <div className="image-container">
+                <span className="scope-label">{project.scope}</span>
+                <img
+                  src={scopeImages[project.scope]}
+                  alt={project.scope}
+                  className="scope-image"
+                />
+              </div>
+            ) : (
+              <p>{project.scope}</p>
+            )}
           </div>
 
           <div className="detail-item">
@@ -112,17 +189,17 @@ function ProjectDetailPage() {
 
           <div className="detail-item">
             <h4>Verifier</h4>
-            <p>{project.verifier}</p>
+            <p>{project.verifier ?? "N/A"}</p>
           </div>
 
           <div className="detail-item">
             <h4>Vintage (First Credit Year)</h4>
-            <p>{project.vintage}</p>
+            <p>{project.vintage ?? "N/A"}</p>
           </div>
 
           <div className="detail-item">
             <h4>Estimated Annual Emission Reductions</h4>
-            <p>{project.estimated_annual_emission_reductions ?? "N/A"}</p>
+            <p className="estimated-value">{formatNumber(project.estimated_annual_emission_reductions)} tCO₂e</p>
           </div>
 
           <div className="detail-item full-width">
@@ -137,6 +214,7 @@ function ProjectDetailPage() {
                 href={project.registry_document}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="document-link"
               >
                 View Registry Document
               </a>

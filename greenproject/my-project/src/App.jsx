@@ -9,6 +9,7 @@ import ProjectCreditPage from './pages/ProjectCreditPage';
 import AccountPage from './pages/AccountPage';
 import UserProjectsPage from './pages/UserProjectsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ProjectEditPage from './pages/ProjectEditPage';
 
 import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
           <Route path="/user/projects" element={<UserProjectsPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/projects/:projectId/edit" element={<ProjectEditPage />} />
         </Routes>
       </main>
 
