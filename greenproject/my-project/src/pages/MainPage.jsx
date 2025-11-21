@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiInfo, FiSliders, FiFileText } from 'react-icons/fi';
 import './MainPage.css';
 import axios from 'axios';
-
-
+import Orb from '../components/ui/Orb';
 
 function FadeInSection(props) {
   const [isVisible, setVisible] = useState(false);
@@ -60,18 +59,28 @@ function MainPage() {
     <div className="main-page-container">
       {/* Hero Section */}
       <section className="hero-section">
-        <FadeInSection>
-          <div className="hero-content">
-            <h1>Explore Every Voluntary Market Projects & Offsets</h1>
-            <p>
-              Discover the latest updates and insights into the voluntary market, including project
-              developments, regulatory changes, and market trends.
-            </p>
-            <Link to="/projects/1" className="cta-button">
-              Explore the Dashboard
-            </Link>
-          </div>
-        </FadeInSection>
+        <div className="hero-background">
+          <Orb
+            hue={120}
+            hoverIntensity={0.4}
+            rotateOnHover={true}
+            forceHoverState={false}
+          />
+        </div>
+        <div className="hero-content-wrapper">
+          <FadeInSection>
+            <div className="hero-content">
+              <h1>Explore Every Voluntary Market Projects & Offsets</h1>
+              <p>
+                Discover the latest updates and insights into the voluntary market, including project
+                developments, regulatory changes, and market trends.
+              </p>
+              <Link to="/projects/1" className="cta-button">
+                Explore the Dashboard
+              </Link>
+            </div>
+          </FadeInSection>
+        </div>
       </section>
 
       {/* Explore Section */}

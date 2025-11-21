@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { projectApi } from '../api/projectApi';
 import './ProjectListPage.css';
-import ACR from '../img/ACR.png';
-import ART from '../img/ART.png';
-import CAR from '../img/CAR.png';
-import GLD from '../img/GLD.png';
-import VCS from '../img/VCS.png';
+import ACR from '../img/ACR2.jpg';
+import ART from '../img/ART2.jpg';
+import CAR from '../img/CAR2.jpg';
+import GLD from '../img/GLD2.jpg';
+import VCS from '../img/VCS2.jpg';
 
 function ProjectListPage() {
   const { pageNo = '1' } = useParams();

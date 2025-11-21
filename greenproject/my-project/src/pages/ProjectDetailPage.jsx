@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
 import './ProjectDetailPage.css';
 
 function ProjectDetailPage() {
   const { projectId } = useParams();
+  const navigate = useNavigate();
 
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,7 +46,7 @@ function ProjectDetailPage() {
       <div className="detail-page-container not-found">
         <h2>Error</h2>
         <p>{error || 'Project not found.'}</p>
-        <Link to="/projects" className="back-button">Back to Project List</Link>
+        <button onClick={() => navigate(-1)} className="back-button">Back to Project List</button>
       </div>
     );
   }
@@ -148,9 +149,9 @@ function ProjectDetailPage() {
 
         {/* 뒤로가기 */}
         <div className="detail-actions">
-          <Link to="/projects/1" className="back-button">
+          <button onClick={() => navigate(-1)} className="back-button">
             Back to Project List
-          </Link>
+          </button>
         </div>
 
       </div>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { SiLeaflet } from 'react-icons/si';
 import { FaChevronDown } from 'react-icons/fa';
 import './Header.css';
 import { projectApi } from '../../api/projectApi';
 
+
 function Header() {
+    const navigate = useNavigate();
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
@@ -27,13 +29,35 @@ function Header() {
 
     const handleLogout = async () => {
         try {
-            await projectApi.logout();
-            setIsLoggedIn(false);
-            setUserInfo(null);
-            setIsDropdownOpen(false);
+            const logoutResult = await projectApi.logout();
+            console.log(logoutResult);
+            if (logoutResult['ok']) {
+                setIsLoggedIn(false);
+                setUserInfo(null);
+                setIsDropdownOpen(false);
+                navigate('/'); // 홈 화면으로 리다이렉트
+            } else {
+                throw Error;
+            }
         } catch (error) {
             console.error("Error logging out:", error);
         }
+    };
+
+    const renderRole = (role) => {
+        // API 값이 영어일 경우를 대비해 매핑 (필요 시 수정 가능)
+        let displayRole = role;
+        let roleClass = 'role-badge';
+
+        if (role === 'admin' || role === 'PROJECT_MANAGER' || role === '프로젝트 관리자') {
+            displayRole = '프로젝트 관리자';
+            roleClass += ' role-admin';
+        } else {
+            displayRole = '일반 사용자';
+            roleClass += ' role-user';
+        }
+
+        return <span className={roleClass}>{displayRole}</span>;
     };
 
     const toggleDropdown = () => {
@@ -51,6 +75,7 @@ function Header() {
                     <div className="header-actions">
                         {isLoggedIn ? (
                             <div className="user-menu-container">
+                                {renderRole(userInfo?.role)}
                                 <button className="user-menu-trigger" onClick={toggleDropdown}>
                                     <span className="user-email">{userInfo?.email}</span>
                                     <FaChevronDown className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`} />
@@ -59,7 +84,7 @@ function Header() {
                                 {isDropdownOpen && (
                                     <div className="dropdown-menu">
                                         <Link to="/account" className="dropdown-item">Account Settings</Link>
-                                        <Link to="/my-projects" className="dropdown-item">User's Project</Link>
+                                        <Link to="/user/projects" className="dropdown-item">User's Project</Link>
                                         <div className="dropdown-divider"></div>
                                         <button onClick={handleLogout} className="dropdown-item logout-item">Logout</button>
                                     </div>

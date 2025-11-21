@@ -7,6 +7,8 @@ import AddProjectPage from './pages/AddProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import ProjectCreditPage from './pages/ProjectCreditPage';
 import AccountPage from './pages/AccountPage';
+import UserProjectsPage from './pages/UserProjectsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 import './App.css';
 
@@ -23,6 +25,8 @@ function App() {
           <Route path="/projects/:projectId/detail" element={<ProjectDetailPage />} />
           <Route path="/projects/:projectId/credit" element={<ProjectCreditPage />} />
           <Route path="/account" element={<AccountPage />} />
+          <Route path="/user/projects" element={<UserProjectsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
 

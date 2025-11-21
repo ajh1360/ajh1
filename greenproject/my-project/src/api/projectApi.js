@@ -39,5 +39,25 @@ export const projectApi = {
       console.error("Error logging out:", error);
       throw error;
     }
+  },
+
+  getUserProjects: async () => {
+    try {
+      const response = await axiosInstance.get(`/user/projects`);
+      return response.data.data;
+    } catch (error) {
+      console.error("Error fetching user projects:", error);
+      throw error;
+    }
+  },
+
+  addNewProject: async (project) => {
+    try {
+      const response = await axiosInstance.post('/projects/new', project);
+      return response.data;
+    } catch (error) {
+      console.error("Error Adding new Project", error)
+      throw error;
+    }
   }
 };

@@ -95,6 +95,8 @@
 /* 로그인 후 사용자 메뉴 스타일 */
 .user-menu-container {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .user-menu-trigger {

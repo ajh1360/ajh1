@@ -144,6 +144,7 @@
   font-size: 16px;
   border: 2px solid #3ddc84;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .back-button:hover {
