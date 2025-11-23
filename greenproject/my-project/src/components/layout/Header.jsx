@@ -111,7 +111,7 @@ function Header() {
                         </button>
                         <h2 className="modal-title">Login</h2>
                         <a
-                            href="/auth/google"
+                            href="/api/auth/google"
                             className="google-login-btn"
                         >
                             <svg className="google-icon" viewBox="0 0 24 24" width="20" height="20">

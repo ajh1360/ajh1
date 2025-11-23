@@ -4,6 +4,7 @@ import { FiInfo, FiSliders, FiFileText } from 'react-icons/fi';
 import './MainPage.css';
 import axios from 'axios';
 import Orb from '../components/ui/Orb';
+import { projectApi } from '../api/projectApi';
 
 function FadeInSection(props) {
   const [isVisible, setVisible] = useState(false);
@@ -39,11 +40,9 @@ function MainPage() {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const res = await axios.get(
-          "http://ec2-52-78-72-83.ap-northeast-2.compute.amazonaws.com:3001/news"
-        );
+        const res = await projectApi.getNews();
 
-        const newsArray = res.data['articles'].slice(0, 3)
+        const newsArray = res['articles'].slice(0, 3)
 
 
         setTopNews(newsArray);
