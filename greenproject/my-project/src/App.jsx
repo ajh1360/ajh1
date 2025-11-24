@@ -3,6 +3,8 @@ import Header from './components/layout/Header';
 import MainPage from './pages/MainPage';
 import LoginPage from './pages/LoginPage';
 import ProjectListPage from './pages/ProjectListPage';
+import ListedProjectListPage from './pages/ListedProjectListPage';
+import ListedProjectDetailPage from './pages/ListedProjectDetailPage';
 import AddProjectPage from './pages/AddProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import ProjectCreditPage from './pages/ProjectCreditPage';
@@ -22,6 +24,8 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/projects/:pageNo" element={<ProjectListPage />} />
+          <Route path="/projects/waiting/:pageNo" element={<ListedProjectListPage />} />
+          <Route path="/projects/waiting/detail/:projectId" element={<ListedProjectDetailPage />} />
           <Route path="/projects/add" element={<AddProjectPage />} />
           <Route path="/projects/:projectId/detail" element={<ProjectDetailPage />} />
           <Route path="/projects/:projectId/credit" element={<ProjectCreditPage />} />

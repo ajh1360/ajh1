@@ -239,6 +239,27 @@ function ProjectEditPage() {
                         />
                     </div>
 
+                    <div className="form-group full-width">
+                        <label>Registry to Register*</label>
+                        <div className="registry-selection-grid">
+                            {registries.map((reg) => (
+                                <div
+                                    key={reg.name}
+                                    className={`registry-option ${formData.registry === reg.name ? 'selected' : ''}`}
+                                    onClick={() => handleRegistrySelect(reg.name)}
+                                >
+                                    <img src={reg.image} alt={reg.name} />
+                                    {/* <span className="registry-name">{reg.name}</span> */}
+                                </div>
+                            ))}
+                        </div>
+                        {/* 접근성을 위한 hidden input */}
+                        <input
+                            type="hidden"
+                            name="registry_"
+                            value={formData.registry}
+                        />
+                    </div>
 
                     <div className="form-group full-width">
                         <label>Scope*</label>

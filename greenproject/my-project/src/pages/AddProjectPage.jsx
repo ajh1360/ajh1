@@ -36,7 +36,10 @@ function AddProjectPage() {
     methodology: '',
     country: '',
     project_developer: '',
-    estimated_annual_emission_reductions: '',
+    description: '',
+    baseline_summary: '',
+    monitoring_plan: '',
+    additionality: '',
   });
 
   const [alert, setAlert] = useState(null);
@@ -160,7 +163,10 @@ function AddProjectPage() {
       'methodology',
       'country',
       'project_developer',
-      'estimated_annual_emission_reductions'
+      'description',
+      'baseline_summary',
+      'monitoring_plan',
+      'additionality'
     ];
 
     const isMissing = requiredFields.some(field => !formData[field]);
@@ -309,6 +315,18 @@ function AddProjectPage() {
           </div>
 
           <div className="form-group full-width">
+            <label htmlFor="description">Description*</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              placeholder="프로젝트 설명"
+              value={formData.description}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div className="form-group full-width">
             <label htmlFor="methodology">Methodology*</label>
             <textarea
               id="methodology"
@@ -316,6 +334,42 @@ function AddProjectPage() {
               rows="4"
               placeholder="등록할 프로젝트의 방법론"
               value={formData.methodology}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div className="form-group full-width">
+            <label htmlFor="baseline_summary">Baseline Summary*</label>
+            <textarea
+              id="baseline_summary"
+              name="baseline_summary"
+              rows="4"
+              placeholder="베이스라인 요약"
+              value={formData.baseline_summary}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div className="form-group full-width">
+            <label htmlFor="monitoring_plan">Monitoring Plan*</label>
+            <textarea
+              id="monitoring_plan"
+              name="monitoring_plan"
+              rows="4"
+              placeholder="모니터링 계획"
+              value={formData.monitoring_plan}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div className="form-group full-width">
+            <label htmlFor="additionality">Additionality*</label>
+            <textarea
+              id="additionality"
+              name="additionality"
+              rows="4"
+              placeholder="추가성"
+              value={formData.additionality}
               onChange={handleChange}
             ></textarea>
           </div>
@@ -347,20 +401,6 @@ function AddProjectPage() {
               name="project_developer"
               placeholder="프로젝트 관리자"
               value={formData.project_developer}
-              onChange={handleChange}
-            />
-          </div>
-          <br></br>
-          <div className="form-group">
-            <label htmlFor="estimated_annual_emission_reductions">
-              Estimated Annual Emission Reductions (tCO₂e)*
-            </label>
-            <input
-              type="number"
-              id="estimated_annual_emission_reductions"
-              name="estimated_annual_emission_reductions"
-              placeholder="예상 감축량 입력"
-              value={formData.estimated_annual_emission_reductions}
               onChange={handleChange}
             />
           </div>

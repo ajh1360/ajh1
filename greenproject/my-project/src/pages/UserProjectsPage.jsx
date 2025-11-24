@@ -104,7 +104,7 @@ function UserProjectsPage() {
                                         <Link to={`/projects/${project.id}/detail`} className="view-link">View</Link>
                                         <Link to={`/projects/${project.id}/edit`} className="edit-link">Edit</Link>
 
-                                        {removingProjectId === project.id ? (
+                                        {/* {removingProjectId === project.id ? (
                                             <span className="remove-confirm-group">
                                                 <button
                                                     className="confirm-remove-btn"
@@ -128,7 +128,7 @@ function UserProjectsPage() {
                                             >
                                                 Remove
                                             </button>
-                                        )}
+                                        )} */}
                                     </td>
                                 </tr>
                             ))}

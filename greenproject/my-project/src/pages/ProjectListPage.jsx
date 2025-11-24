@@ -201,6 +201,26 @@ function ProjectListPage() {
       {/* 왼쪽 필터 사이드바 */}
       <aside className="filter-sidebar">
         <div className="filter-section">
+          <h3>Menu</h3>
+          <div className="filter-buttons vertical">
+            <button
+              className="filter-btn active"
+              onClick={() => navigate('/projects/1')}
+            >
+              Active Projects
+            </button>
+            <button
+              className="filter-btn"
+              onClick={() => navigate('/projects/waiting/1')}
+            >
+              Listed Projects
+            </button>
+          </div>
+        </div>
+
+        <hr className="sidebar-divider" />
+
+        <div className="filter-section">
           <h3>Search</h3>
           <input
             type="text"
