@@ -83,8 +83,8 @@ function Header() {
 
                                 {isDropdownOpen && (
                                     <div className="dropdown-menu">
-                                        <Link to="/account" className="dropdown-item">Account Settings</Link>
-                                        <Link to="/user/projects" className="dropdown-item">User's Project</Link>
+                                        <Link to="/account" className="dropdown-item" onClick={() => setIsDropdownOpen(false)}>Account Settings</Link>
+                                        <Link to="/user/projects" className="dropdown-item" onClick={() => setIsDropdownOpen(false)}>User's Project</Link>
                                         <div className="dropdown-divider"></div>
                                         <button onClick={handleLogout} className="dropdown-item logout-item">Logout</button>
                                     </div>

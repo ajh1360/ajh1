@@ -12,6 +12,7 @@ import AccountPage from './pages/AccountPage';
 import UserProjectsPage from './pages/UserProjectsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProjectEditPage from './pages/ProjectEditPage';
+import ListedProjectEditPage from './pages/ListedProjectEditPage';
 
 import './App.css';
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/projects/:pageNo" element={<ProjectListPage />} />
           <Route path="/projects/waiting/:pageNo" element={<ListedProjectListPage />} />
           <Route path="/projects/waiting/detail/:projectId" element={<ListedProjectDetailPage />} />
+          <Route path="/projects/waiting/:projectId/edit" element={<ListedProjectEditPage />} />
           <Route path="/projects/add" element={<AddProjectPage />} />
           <Route path="/projects/:projectId/detail" element={<ProjectDetailPage />} />
           <Route path="/projects/:projectId/credit" element={<ProjectCreditPage />} />

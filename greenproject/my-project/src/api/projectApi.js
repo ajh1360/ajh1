@@ -88,6 +88,16 @@ export const projectApi = {
     }
   },
 
+  editUserProject: async (projectId, formdata) => {
+    try {
+      const response = await axiosInstance.patch(`/projects/waiting/${projectId}`, formdata);
+      return response.data;
+    } catch (error) {
+      console.error("Error editing user project:", error);
+      throw error;
+    }
+  },
+
   // 특정 프로젝트에 기록된 사용자의 리액션 들고오기
   getReaction: async (projectId) => {
     try {
@@ -106,6 +116,38 @@ export const projectApi = {
       return response.data;
     } catch (error) {
       console.error("Error posting reaction:", error);
+      throw error;
+    }
+  },
+
+  // 프로젝트에 달린 댓글 목록 가져오기
+  getComments: async (projectId) => {
+    try {
+      const response = await axiosInstance.get(`/projects/waiting/detail/${projectId}/comments`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      throw error;
+    }
+  },
+
+  // 프로젝트에 댓글 남기기
+  postComment: async (projectId, comment) => {
+    try {
+      const response = await axiosInstance.post(`/projects/waiting/${projectId}/comment`, comment);
+      return response.data;
+    } catch (error) {
+      console.error("Error posting comment:", error);
+      throw error;
+    }
+  },
+
+  removeComment: async (commentId) => {
+    try {
+      const response = await axiosInstance.delete(`/projects/waiting/detail/${commentId}/comment`);
+      return response.data;
+    } catch (error) {
+      console.error("Error removing comment:", error);
       throw error;
     }
   },

@@ -30,14 +30,17 @@ function ProjectEditPage() {
 
     const [formData, setFormData] = useState({
         project_name: '',
+        project_developer: '',
         registry: '',
         scope: '',
         type: '',
-        removal_or_reduction: '',
-        methodology: '',
         country: '',
-        project_developer: '',
-        estimated_annual_emission_reductions: '',
+        description: '',
+        methodology: '',
+        baseline_summary: '',
+        monitoring_plan: '',
+        additionality: '',
+        removal_or_reduction: '',
     });
 
     const [alert, setAlert] = useState(null);
@@ -49,19 +52,22 @@ function ProjectEditPage() {
     useEffect(() => {
         const fetchProject = async () => {
             try {
-                const data = await projectApi.getProjectDetail(projectId);
+                const data = await projectApi.getUserProjectDetail(projectId);
                 // API 응답 데이터가 formData 키와 일치한다고 가정하고 상태 업데이트
                 // 만약 키가 다르다면 여기서 매핑이 필요할 수 있음
                 setFormData({
                     project_name: data.project_name || '',
+                    project_developer: data.developer_name || '',
                     registry: data.registry || '',
                     scope: data.scope || '',
                     type: data.type || '',
-                    removal_or_reduction: data.removal_or_reduction || '',
-                    methodology: data.methodology || '',
                     country: data.country || '',
-                    project_developer: data.project_developer || '',
-                    estimated_annual_emission_reductions: data.estimated_annual_emission_reductions || '',
+                    description: data.description || '',
+                    methodology: data.methodology || '',
+                    baseline_summary: data.baseline_summary || '',
+                    monitoring_plan: data.monitoring_plan || '',
+                    additionality: data.additionality || '',
+                    removal_or_reduction: data.removal_or_reduction || '',
                 });
             } catch (error) {
                 console.error("Error fetching project details:", error);
@@ -80,6 +86,10 @@ function ProjectEditPage() {
             topRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }, [alert]);
+
+    useEffect(() => {
+        console.log(formData)
+    }, [formData])
 
     // Registry 목록 데이터
     const registries = [
@@ -189,7 +199,10 @@ function ProjectEditPage() {
             'methodology',
             'country',
             'project_developer',
-            'estimated_annual_emission_reductions'
+            'description',
+            'baseline_summary',
+            'monitoring_plan',
+            'additionality'
         ];
 
         const isMissing = requiredFields.some(field => !formData[field]);
@@ -200,13 +213,14 @@ function ProjectEditPage() {
         }
 
         try {
-            await projectApi.updateProject(projectId, formData);
+            await projectApi.editUserProject(projectId, formData);
             setAlert({ type: 'success', message: '프로젝트가 성공적으로 수정되었습니다.' });
-            // 성공 후 잠시 대기 후 이동하거나 바로 이동
-            // setTimeout(() => navigate(`/projects/${projectId}/detail`), 1500);
+            console.log('Submitted data:', formData);
+            // 성공 후 목록 페이지로 이동하거나 머무를 수 있음. 여기서는 잠시 후 이동하도록 설정 가능
+            // setTimeout(() => navigate('/user/projects'), 1500);
         } catch (error) {
-            console.error("Error updating project:", error);
-            setAlert({ type: 'error', message: '프로젝트 수정 중 오류가 발생했습니다.' });
+            console.error("Failed to update project:", error);
+            setAlert({ type: 'error', message: '프로젝트 수정에 실패했습니다.' });
         }
     };
 
@@ -220,7 +234,7 @@ function ProjectEditPage() {
                 <div className={`alert alert-${alert.type}`}>
                     <strong>{alert.type === 'success' ? 'Success' : 'Error'}</strong>
                     {alert.message}
-                    {alert.type === "success" ? <Link to={`/projects/${projectId}/detail`} className="add-project-btn">프로젝트 상세로 이동</Link> : null}
+                    {alert.type === "success" ? <Link to={`/projects/waiting/detail/${projectId}`} className="add-project-btn">프로젝트 상세로 이동</Link> : null}
                 </div>
             )}
 
@@ -341,17 +355,6 @@ function ProjectEditPage() {
                         />
                     </div>
 
-                    <div className="form-group full-width">
-                        <label htmlFor="methodology">Methodology*</label>
-                        <textarea
-                            id="methodology"
-                            name="methodology"
-                            rows="4"
-                            placeholder="등록할 프로젝트의 방법론"
-                            value={formData.methodology}
-                            onChange={handleChange}
-                        ></textarea>
-                    </div>
 
                     <div className="form-group">
                         <label htmlFor="country">Country*</label>
@@ -371,6 +374,7 @@ function ProjectEditPage() {
                             ))}
                         </datalist>
                     </div>
+
                     <br></br>
                     <div className="form-group">
                         <label htmlFor="project_developer">Project Developer*</label>
@@ -384,19 +388,63 @@ function ProjectEditPage() {
                         />
                     </div>
                     <br></br>
-                    <div className="form-group">
-                        <label htmlFor="estimated_annual_emission_reductions">
-                            Estimated Annual Emission Reductions (tCO₂e)*
-                        </label>
-                        <input
-                            type="number"
-                            id="estimated_annual_emission_reductions"
-                            name="estimated_annual_emission_reductions"
-                            placeholder="예상 감축량 입력"
-                            value={formData.estimated_annual_emission_reductions}
+                    <div className="form-group full-width">
+                        <label htmlFor="description">description*</label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            rows="2"
+                            placeholder="등록할 프로젝트에 대한 설명을 입력해주세요"
+                            value={formData.description}
                             onChange={handleChange}
-                        />
+                        ></textarea>
                     </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="methodology">Methodology*</label>
+                        <textarea
+                            id="methodology"
+                            name="methodology"
+                            rows="2"
+                            placeholder="등록할 프로젝트의 방법론을 입력해주세요"
+                            value={formData.methodology}
+                            onChange={handleChange}
+                        ></textarea>
+                    </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="baseline_summary">Baseline Summary*</label>
+                        <textarea
+                            id="baseline_summary"
+                            name="baseline_summary"
+                            rows="4"
+                            placeholder="등록할 프로젝트의 베이스라인을 입력해주세요"
+                            value={formData.baseline_summary}
+                            onChange={handleChange}
+                        ></textarea>
+                    </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="monitoring_plan">Monitoring Plan*</label>
+                        <textarea
+                            id="monitoring_plan"
+                            name="monitoring_plan"
+                            rows="4"
+                            placeholder="등록할 프로젝트의 모니터링 방법을 입력해주세요"
+                            value={formData.monitoring_plan}
+                            onChange={handleChange}
+                        ></textarea>
+                    </div>
+                    <div className="form-group full-width">
+                        <label htmlFor="additionality">Additionality*</label>
+                        <textarea
+                            id="additionality"
+                            name="additionality"
+                            rows="4"
+                            placeholder="등록할 프로젝트의 추가성을 입력해주세요"
+                            value={formData.additionality}
+                            onChange={handleChange}
+                        ></textarea>
+                    </div>
+                    <br></br>
+
                 </div>
 
                 <div className="form-actions">

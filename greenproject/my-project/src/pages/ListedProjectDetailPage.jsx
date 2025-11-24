@@ -29,6 +29,9 @@ function ListedProjectDetailPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [userReaction, setUserReaction] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState('');
+    const [userInfo, setUserInfo] = useState(null);
 
     // Registry 이미지 매핑
     const registryImages = {
@@ -58,14 +61,17 @@ function ListedProjectDetailPage() {
                 setLoading(true);
                 setError(null);
 
-                // 프로젝트 정보와 사용자 리액션을 병렬로 가져옴
-                const [projectData, reactionData] = await Promise.all([
+                // 프로젝트 정보, 사용자 리액션, 댓글 목록을 병렬로 가져옴
+                const [projectData, reactionData, commentsData, userInfoData] = await Promise.all([
                     projectApi.getUserProjectDetail(projectId),
-                    projectApi.getReaction(projectId).catch(() => ({ reaction: null })) // 에러 시 null 처리
+                    projectApi.getReaction(projectId).catch(() => ({ reaction: null })), // 에러 시 null 처리
+                    projectApi.getComments(projectId).catch(() => []), // 에러 시 빈 배열 처리
+                    projectApi.getUserInfo().catch(() => ({ user: null }))
                 ]);
-
                 setProject(projectData);
                 setUserReaction(reactionData.reaction);
+                setComments(commentsData);
+                setUserInfo(userInfoData);
             } catch (err) {
                 console.error('Failed to fetch project data:', err);
                 setError('Failed to load project data.');
@@ -107,6 +113,35 @@ function ListedProjectDetailPage() {
         }
     };
 
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
+        if (!newComment.trim()) return;
+
+        try {
+            await projectApi.postComment(projectId, { content: newComment });
+            setNewComment('');
+            // 댓글 목록 갱신
+            const commentsData = await projectApi.getComments(projectId);
+            setComments(commentsData);
+        } catch (error) {
+            console.error("Failed to post comment:", error);
+            alert("Failed to post comment. Please try again.");
+        }
+    };
+
+    const handleDeleteComment = async (commentId) => {
+        try {
+            await projectApi.removeComment(commentId);
+            // 댓글 목록 갱신
+            const commentsData = await projectApi.getComments(projectId);
+            setComments(commentsData);
+        } catch (error) {
+            console.error("Failed to delete comment:", error);
+            alert("Failed to delete comment. Please try again.");
+        }
+    };
+
+
     if (loading) {
         return (
             <div className="detail-page-container">
@@ -135,6 +170,9 @@ function ListedProjectDetailPage() {
                         <span className={`status-pill status-${project.status?.toLowerCase()}`}>
                             {project.status}
                         </span>
+                    </div>
+                    <div className="last-updated">
+                        Last updated at : {new Date(project.updated_at).toLocaleString()}
                     </div>
                 </div>
 
@@ -173,6 +211,10 @@ function ListedProjectDetailPage() {
                         )}
                     </div>
 
+                    <div className="detail-item">
+                        <h4>Public Code</h4>
+                        <p>{project.public_code}</p>
+                    </div>
 
                     <div className="detail-item">
                         <h4>Country</h4>
@@ -188,6 +230,7 @@ function ListedProjectDetailPage() {
                         <h4>Removal or Reduction</h4>
                         <p>{project.removal_or_reduction}</p>
                     </div>
+
 
 
                     <div className="detail-item full-width">
@@ -234,6 +277,43 @@ function ListedProjectDetailPage() {
                         Not convinced
                         <span className="vote-count">{project.dislike_count} votes</span>
                     </button>
+                </div>
+
+                <hr className="divider" />
+
+                {/* 댓글 섹션 */}
+                <div className="comments-section">
+                    <h3 className="comments-header">Comments</h3>
+
+                    <div className="comments-list">
+                        {comments.length > 0 ? (
+                            comments.map((comment, index) => (
+                                <div key={comment.id} className="comment-item">
+                                    <div className="comment-header-row">
+                                        <div className="comment-author">{comment.email}</div>
+                                        {userInfo.email === comment.email ? <button onClick={() => handleDeleteComment(comment.id)} className="comment-delete-btn">Delete</button> : null}
+                                    </div>
+                                    <div className="comment-content">{comment.content}</div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="no-comments">No comments yet in this project.</div>
+                        )}
+                    </div>
+
+                    <form onSubmit={handleCommentSubmit} className="comment-form">
+                        <textarea
+                            className="comment-input"
+                            placeholder="Leave a comment..."
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            rows="2"
+                            disabled={userInfo.user === null}
+                        />
+                        <button type="submit" className="comment-submit-btn" disabled={!newComment.trim() || userInfo.user === null}>
+                            Post
+                        </button>
+                    </form>
                 </div>
 
                 <hr className="divider" />

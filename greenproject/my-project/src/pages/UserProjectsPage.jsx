@@ -82,7 +82,7 @@ function UserProjectsPage() {
                     <table className="projects-table">
                         <thead>
                             <tr>
-                                <th>Project ID</th>
+                                <th>Public code</th>
                                 <th>Registry</th>
                                 <th>Scope</th>
                                 <th>Status</th>
@@ -92,7 +92,7 @@ function UserProjectsPage() {
                         <tbody>
                             {projects.map((project) => (
                                 <tr key={project.id}>
-                                    <td>{project.project_id}</td>
+                                    <td>{project.public_code}</td>
                                     <td>{project.registry}</td>
                                     <td>{project.scope}</td>
                                     <td>
@@ -101,8 +101,10 @@ function UserProjectsPage() {
                                         </span>
                                     </td>
                                     <td>
-                                        <Link to={`/projects/${project.id}/detail`} className="view-link">View</Link>
-                                        <Link to={`/projects/${project.id}/edit`} className="edit-link">Edit</Link>
+                                        <Link to={`/projects/waiting/detail/${project.id}`} className="view-link">View</Link>
+                                        {project.status === "waiting" ? (
+                                            <Link to={`/projects/waiting/${project.id}/edit`} className="edit-link">Edit</Link>
+                                        ) : null}
 
                                         {/* {removingProjectId === project.id ? (
                                             <span className="remove-confirm-group">
