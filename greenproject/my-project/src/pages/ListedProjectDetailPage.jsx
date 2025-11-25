@@ -84,6 +84,10 @@ function ListedProjectDetailPage() {
     }, [projectId]);
 
     const handleLike = async () => {
+        if (!userInfo || !userInfo.user) {
+            alert("로그인이 필요한 서비스입니다.");
+            return;
+        }
         try {
             await projectApi.postReaction(projectId, { reaction: 'like' });
             // 리액션 후 데이터 갱신
@@ -99,6 +103,10 @@ function ListedProjectDetailPage() {
     };
 
     const handleDislike = async () => {
+        if (!userInfo || !userInfo.user) {
+            alert("로그인이 필요한 서비스입니다.");
+            return;
+        }
         try {
             await projectApi.postReaction(projectId, { reaction: 'dislike' });
             // 리액션 후 데이터 갱신
@@ -304,7 +312,8 @@ function ListedProjectDetailPage() {
                     <form onSubmit={handleCommentSubmit} className="comment-form">
                         <textarea
                             className="comment-input"
-                            placeholder="Leave a comment..."
+
+                            placeholder={userInfo.user === null ? "Please login to comment" : "Leave a comment..."}
                             value={newComment}
                             onChange={(e) => setNewComment(e.target.value)}
                             rows="2"
